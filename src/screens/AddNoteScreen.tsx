@@ -19,14 +19,18 @@ import {
   getDocs,
 } from '../firebase/config';
 import { deleteDoc, doc, QuerySnapshot, updateDoc } from 'firebase/firestore';
+import { useDispatch, useSelector } from 'react-redux';
+import { setAppTitle } from '../redux/actions';
 const TodoAppScreen = () => {
-  const [appTitle, setAppTitle] = useState(''); // 🌟 App Title Input
+  // const [appTitle, setAppTitle] = useState(''); // 🌟 App Title Input
   const [title, setTitle] = useState('');
   const [todos, setTodos] = useState([]);
   const [editingTodo, setEditingTodo] = useState(null);
   const [modalVisible, setModalVisible] = useState(false);
   const [editText, setEditText] = useState('');
+  const dispatch = useDispatch();
 
+  const appTitle = useSelector((state: any) => state.app.title);
   useEffect(() => {
     getShoppingList()
   },[] )
@@ -167,11 +171,11 @@ const saveEditTodo = async () => {
     <View style={styles.container}>
       {/* 🌟 App Title Input */}
       <TextInput
-        value={appTitle}
-        onChangeText={setAppTitle}
-        style={styles.appTitleInput}
-        placeholder="Enter app title"
-      />
+  value={appTitle}
+  onChangeText={text => dispatch(setAppTitle(text))}
+  placeholder="Enter app title"
+  style={styles.appTitleInput}
+/>
 
       {/* Task Input */}
       <View style={styles.inputContainer}>

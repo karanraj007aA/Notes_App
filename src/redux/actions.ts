@@ -5,7 +5,8 @@ import {
   DELETE_NOTE, 
   SET_NOTES,
   SET_LOADING,
-  SET_ERROR
+  SET_ERROR,
+  SET_APP_TITLE
 } from './types';
 
 export const fetchNotes = () => {
@@ -107,3 +108,8 @@ export const deleteNote = (id: string) => {
     }
   };
 };
+
+export const setAppTitle = (title: string) => ({
+  type: SET_APP_TITLE,
+  payload: title,
+});
